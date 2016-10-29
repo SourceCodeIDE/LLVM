@@ -16,7 +16,11 @@ set(SOURCES
 
 set(LLVM_EXPORTED_SYMBOL_FILE ${CMAKE_CURRENT_SOURCE_DIR}/lto.exports)
 
+if (CMAKE_SYSTEM_NAME MATCHES "Windows")
+add_llvm_library(LTO ${SOURCES})
+else()
 add_llvm_library(LTO SHARED ${SOURCES})
+endif()
 
 install(FILES ${LLVM_MAIN_INCLUDE_DIR}/llvm-c/lto.h
   DESTINATION include/llvm-c
